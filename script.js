@@ -1,3 +1,17 @@
+let displayValue;
+
+let numberButtons = document.querySelectorAll("#digit");
+
+numberButtons.forEach(digit => {
+    digit.addEventListener("click", () => {
+        display.textContent += digit.textContent;
+        displayValue = display.textContent;
+        console.log(displayValue);
+    })
+})
+
+let display = document.querySelector("#display");
+
 function add(firstNumber, secondNumber) {
     return firstNumber + secondNumber;
 }
@@ -26,8 +40,3 @@ function operate(firstNumber, secondNumber, operator) {
             return divide(firstNumber, secondNumber);
     }
 }
-
-console.log(operate(1, 2, "+"));
-console.log(operate(5, 2, "-"));
-console.log(operate(5, 6, "*"));
-console.log(operate(50, 10, "/"));
