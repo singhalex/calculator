@@ -1,6 +1,8 @@
 let displayValue;
 
 const numberButtons = document.querySelectorAll("#digit");
+let display = document.querySelector("#display");
+
 
 numberButtons.forEach(digit => {
     digit.addEventListener("click", () => {
@@ -8,11 +10,11 @@ numberButtons.forEach(digit => {
             return;
         } else if (display.textContent.includes(".") && digit.textContent === ".") {
             return;
-        } if (display.textContent.charAt(0) === "0" && display.textContent.length == 1 && digit.textContent != ".") {
+        } else if (display.textContent.charAt(0) === "0" && display.textContent.length == 1 && digit.textContent != ".") {
             display.textContent = "";
             display.textContent += digit.textContent;
             displayValue = display.textContent;
-        } if (display.textContent.length == 9) {
+        } else if (display.textContent.length == 9) {
             return;
         } else {
             display.textContent += digit.textContent;
@@ -21,7 +23,6 @@ numberButtons.forEach(digit => {
     })
 })
 
-let display = document.querySelector("#display");
 
 function add(firstNumber, secondNumber) {
     return firstNumber + secondNumber;
