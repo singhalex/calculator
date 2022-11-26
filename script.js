@@ -1,12 +1,23 @@
 let displayValue;
 
-let numberButtons = document.querySelectorAll("#digit");
+const numberButtons = document.querySelectorAll("#digit");
 
 numberButtons.forEach(digit => {
     digit.addEventListener("click", () => {
-        display.textContent += digit.textContent;
-        displayValue = display.textContent;
-        console.log(displayValue);
+        if (display.textContent === "0" && digit.textContent === "0") {
+            return;
+        } else if (display.textContent.includes(".") && digit.textContent === ".") {
+            return;
+        } if (display.textContent.charAt(0) === "0" && display.textContent.length == 1 && digit.textContent != ".") {
+            display.textContent = "";
+            display.textContent += digit.textContent;
+            displayValue = display.textContent;
+        } if (display.textContent.length == 9) {
+            return;
+        } else {
+            display.textContent += digit.textContent;
+            displayValue = display.textContent;
+        }
     })
 })
 
