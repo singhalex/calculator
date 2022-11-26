@@ -1,9 +1,15 @@
 let displayValue;
+let operatorValue;
+let firstNumber;
+let secondNumber;
 
 const numberButtons = document.querySelectorAll("#digit");
 const display = document.querySelector("#display");
 const clearButton = document.querySelector(".clear");
 const operators = document.querySelectorAll("#operator");
+
+console.log(operators);
+console.log(numberButtons);
 
 
 numberButtons.forEach(digit => {
@@ -26,12 +32,19 @@ numberButtons.forEach(digit => {
 })
 
 clearButton.addEventListener("click", () => {
-    display.textContent = "0";
+    display.textContent = "0"; 
 })
 
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
-        
+        console.log("operator");
+        display.textContent = displayValue;
+        firstNumber ? secondNumber = displayValue : firstNumber = displayValue;
+        operatorValue = operator.textContent;
+        display.textContent = "0";
+        console.log(firstNumber);
+        console.log(secondNumber);
+        console.log(operatorValue);
     })
 })
 
