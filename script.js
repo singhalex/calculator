@@ -1,7 +1,9 @@
 let displayValue;
 
 const numberButtons = document.querySelectorAll("#digit");
-let display = document.querySelector("#display");
+const display = document.querySelector("#display");
+const clearButton = document.querySelector(".clear");
+const operators = document.querySelectorAll("#operator");
 
 
 numberButtons.forEach(digit => {
@@ -20,6 +22,16 @@ numberButtons.forEach(digit => {
             display.textContent += digit.textContent;
             displayValue = display.textContent;
         }
+    })
+})
+
+clearButton.addEventListener("click", () => {
+    display.textContent = "0";
+})
+
+operators.forEach(operator => {
+    operator.addEventListener("click", () => {
+        
     })
 })
 
