@@ -2,15 +2,13 @@ let displayValue;
 let operatorValue;
 let firstNumber;
 let secondNumber;
+let displayClearFlag = false;
 
 const numberButtons = document.querySelectorAll("#digit");
 const display = document.querySelector("#display");
 const clearButton = document.querySelector(".clear");
 const operators = document.querySelectorAll("#operator");
-
-console.log(operators);
-console.log(numberButtons);
-
+const equals = document.querySelector(".equals");
 
 numberButtons.forEach(digit => {
     digit.addEventListener("click", () => {
@@ -19,14 +17,29 @@ numberButtons.forEach(digit => {
         } else if (display.textContent.includes(".") && digit.textContent === ".") {
             return;
         } else if (display.textContent.charAt(0) === "0" && display.textContent.length == 1 && digit.textContent != ".") {
-            display.textContent = "";
-            display.textContent += digit.textContent;
-            displayValue = display.textContent;
+            if (displayClearFlag) {
+                display.textContent = "";
+                display.textContent += digit.textContent;
+                displayValue = display.textContent;
+                displayClearFlag = false;
+            } else {
+                display.textContent = "";
+                display.textContent += digit.textContent;
+                displayValue = display.textContent;
+            }            
         } else if (display.textContent.length == 9) {
             return;
         } else {
-            display.textContent += digit.textContent;
-            displayValue = display.textContent;
+            if (displayClearFlag) {
+                display.textContent = "";
+                display.textContent += digit.textContent;
+                displayValue = display.textContent;
+                displayClearFlag = false;
+            } else {
+                display.textContent += digit.textContent;
+                displayValue = display.textContent;
+            }
+            
         }
     })
 })
@@ -37,15 +50,35 @@ clearButton.addEventListener("click", () => {
 
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
-        console.log("operator");
         display.textContent = displayValue;
-        firstNumber ? secondNumber = displayValue : firstNumber = displayValue;
+        firstNumber ? secondNumber = Number(displayValue) : firstNumber = Number(displayValue);
         operatorValue = operator.textContent;
-        display.textContent = "0";
-        console.log(firstNumber);
-        console.log(secondNumber);
-        console.log(operatorValue);
+        displayClearFlag = true;
     })
+})
+
+equals.addEventListener("click", () => {
+    secondNumber = Number(display.textContent)
+    switch (operatorValue) {
+        case "+":
+            display.textContent = add(firstNumber, secondNumber);
+            displayClearFlag = true;
+            break;
+        case "-":
+            display.textContent = subtract(firstNumber, secondNumber);
+            displayClearFlag = true;
+            break;
+        case "X":
+            display.textContent = multiply(firstNumber, secondNumber);
+            displayClearFlag = true;
+            break;
+        case "÷":
+            display.textContent = divide(firstNumber, secondNumber);
+            displayClearFlag = true;
+            break;
+    }
+    firstNumber = undefined;
+    secondNumber = undefined;
 })
 
 
