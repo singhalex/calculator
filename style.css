@@ -4,7 +4,8 @@ body {
 }
 
 #calculator {
-    width: 560px;
+    width: 540px;
+    min-width: 540px;
     height: 600px;
     background-color: #3A8891;
     border-radius: 10px;
@@ -15,11 +16,11 @@ body {
 }
 
 #display {
-    width: 450px;
+    width: 420px;
     height: 40px;
     background-color: #F2DEBA;
     font-family: 'Press Start 2P', cursive;
-    font-size: 50px;
+    font-size: 46px;
     text-align: right;
     padding: 30px;
     border-radius: 10px;
@@ -40,7 +41,7 @@ body {
 }
 
 button {
-    font-size: 36px;
+    font-size: 28px;
     font-family: 'Press Start 2P', cursive;
     margin: 4px;
     border-radius: 10px;
