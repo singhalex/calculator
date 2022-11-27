@@ -6,23 +6,27 @@ body {
 #calculator {
     width: 600px;
     height: 600px;
-    background-color: aquamarine;
+    background-color: #3A8891;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-style: solid;
 }
 
 #display {
     width: 500px;
     height: 40px;
-    background-color: lightgrey;
+    background-color: #F2DEBA;
     font-family: 'Press Start 2P', cursive;
     font-size: 54px;
     text-align: right;
     padding: 30px;
     border-radius: 10px;
+    border-style: solid;
     margin: 50px 0px;
+    /* color: #0E5E6F; */
+    
 }
 
 #button-container {
@@ -40,5 +44,8 @@ button {
     font-family: 'Press Start 2P', cursive;
     margin: 4px;
     border-radius: 10px;
-    padding: 20px
+    padding: 20px;
+    background-color: #FFEFD6;
+    text-align: center;
+
 }
