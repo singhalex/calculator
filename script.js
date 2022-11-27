@@ -44,6 +44,8 @@ numberButtons.forEach(digit => {
     })
 })
 
+
+
 clearButton.addEventListener("click", () => {
     display.textContent = "0"; 
 })
@@ -76,9 +78,12 @@ equals.addEventListener("click", () => {
             display.textContent = divide(firstNumber, secondNumber);
             displayClearFlag = true;
             break;
+        default:
+            break
     }
     firstNumber = undefined;
     secondNumber = undefined;
+    operatorValue = undefined;
 })
 
 
@@ -96,17 +101,4 @@ function multiply(firstNumber, secondNumber) {
 
 function divide(firstNumber, secondNumber) {
     return firstNumber / secondNumber;
-}
-
-function operate(firstNumber, secondNumber, operator) {
-    switch (operator) {
-        case "+":
-            return add(firstNumber, secondNumber);
-        case "-":
-            return subtract(firstNumber, secondNumber);
-        case "*":
-            return multiply(firstNumber, secondNumber);
-        case "/":
-            return divide(firstNumber, secondNumber);
-    }
 }

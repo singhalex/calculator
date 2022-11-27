@@ -7,19 +7,19 @@ button {
 }
 
 #display {
-    width: 500px;
-    height: 100px;
+    width: 480px;
+    height: 40px;
     background-color: lightgrey;
     font-family: 'Press Start 2P', cursive;
-    font-size: 54px;
+    font-size: 52px;
     text-align: right;
     padding: 30px;
     border-radius: 10px;
-    margin: 20px 0px;
+    margin: 50px 0px;
 }
 
 #calculator {
-    width: 600px;
+    width: 580px;
     height: 600px;
     background-color: aquamarine;
     border-radius: 10px;
