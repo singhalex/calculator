@@ -1,4 +1,5 @@
 const maxDisplayLength = 9;
+let clearCount = 0;
 let displayValue;
 let operatorValue;
 let firstNumber;
@@ -55,7 +56,15 @@ numberButtons.forEach(digit => {
 
 
 clearButton.addEventListener("click", () => {
-    display.textContent = "0"; 
+    display.textContent = "0";
+    if (clearCount == 1) {
+        firstNumber = undefined;
+        secondNumber = undefined;
+        operatorValue = undefined;
+        clearCount--;
+    } else {
+        clearCount++;
+    }
 })
 
 operators.forEach(operator => {
