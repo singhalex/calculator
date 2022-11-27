@@ -1,3 +1,4 @@
+const maxDisplayLength = 9;
 let displayValue;
 let operatorValue;
 let firstNumber;
@@ -27,7 +28,7 @@ numberButtons.forEach(digit => {
                 display.textContent += digit.textContent;
                 displayValue = display.textContent;
             }            
-        } else if (display.textContent.length == 9) {
+        } else if (display.textContent.length == maxDisplayLength && displayClearFlag == false) {
             return;
         } else {
             if (displayClearFlag) {
@@ -43,6 +44,13 @@ numberButtons.forEach(digit => {
         }
     })
 })
+
+// numberButtons.forEach(digit => {
+//     digit.addEventListener("keydown", event => {
+//         console.log(event.key);
+//         console.log(digit.textContent);
+//         })
+// })
 
 
 
@@ -63,21 +71,41 @@ equals.addEventListener("click", () => {
     secondNumber = Number(display.textContent)
     switch (operatorValue) {
         case "+":
-            display.textContent = add(firstNumber, secondNumber);
-            displayClearFlag = true;
-            break;
+            if (add(firstNumber, secondNumber).toString().length > maxDisplayLength) {
+                errorScreen();
+                break;
+            } else {
+                display.textContent = add(firstNumber, secondNumber);
+                displayClearFlag = true;
+                break;
+            }
         case "-":
-            display.textContent = subtract(firstNumber, secondNumber);
-            displayClearFlag = true;
-            break;
+            if (subtract(firstNumber, secondNumber).toString().length > maxDisplayLength) {
+                errorScreen();
+                break;
+            } else {
+                display.textContent = subtract(firstNumber, secondNumber);
+                displayClearFlag = true;
+                break;
+            }
         case "X":
-            display.textContent = multiply(firstNumber, secondNumber);
-            displayClearFlag = true;
-            break;
+            if (multiply(firstNumber, secondNumber).toString().length > maxDisplayLength) {
+                errorScreen();
+                break;
+            } else {
+                display.textContent = multiply(firstNumber, secondNumber);
+                displayClearFlag = true;
+                break;
+            }            
         case "÷":
-            display.textContent = divide(firstNumber, secondNumber);
-            displayClearFlag = true;
-            break;
+            if (divide(firstNumber, secondNumber).toString().length > maxDisplayLength) {
+                errorScreen();
+                break;
+            } else {
+                display.textContent = divide(firstNumber, secondNumber);
+                displayClearFlag = true;
+                break;
+            }           
         default:
             break
     }
@@ -85,6 +113,10 @@ equals.addEventListener("click", () => {
     secondNumber = undefined;
     operatorValue = undefined;
 })
+
+function errorScreen() {
+    display.textContent = "halp!";
+}
 
 
 function add(firstNumber, secondNumber) {
