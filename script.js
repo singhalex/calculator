@@ -21,9 +21,12 @@ window.addEventListener("keydown", event => {
         updateScreen(event.key);
     } else if (event.key === ".") {
         updateScreen(event.key);
-    } else if (event.key === "+" || event.key === "-" || event.key === "*" || event.key === "/") {
+    } else if (event.key === "+" || event.key === "-" || event.key === "*") {
         updateOperator(event.key);
+    } else if (event.key === "/") {
+        updateOperator("÷");
     } else if (event.key === "Enter") {
+        event.preventDefault();
         evaluate();
     } else if (event.key === "Escape") {
         clearScreen();
@@ -138,6 +141,7 @@ function clearScreen () {
 
 function errorScreen() {
     display.textContent = "halp!";
+    displayClearFlag = true;
 }
 
 function add(firstNumber, secondNumber) {
