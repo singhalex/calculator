@@ -33,7 +33,6 @@ window.addEventListener("keydown", event => {
     }
 })
 
-
 clearButton.addEventListener("click", () => clearScreen());
 
 operators.forEach(operator => {
@@ -122,9 +121,15 @@ function updateScreen (digit) {
 
 function updateOperator(operator) {
     display.textContent = displayValue;
-        firstNumber ? secondNumber = Number(displayValue) : firstNumber = Number(displayValue);
-        operatorValue = operator;
-        displayClearFlag = true;
+    if (firstNumber) {
+        secondNumber = Number(displayValue);
+        evaluate(firstNumber, secondNumber);
+        firstNumber = Number(display.textContent);
+    } else {
+        firstNumber = Number(displayValue);
+    };
+    operatorValue = operator;
+    displayClearFlag = true;
 }
 
 function clearScreen () {
