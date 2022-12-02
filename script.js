@@ -16,13 +16,19 @@ numberButtons.forEach(digit => {
     digit.addEventListener("click", () => updateScreen(digit.textContent));
 })
 
-// numberButtons.forEach(digit => {
-//     digit.addEventListener("keydown", event => {
-//         console.log(event.key);
-//         console.log(digit.textContent);
-//         })
-// })
-
+window.addEventListener("keydown", event => {
+    if (event.key >= 0 && event.key <= 9) {
+        updateScreen(event.key);
+    } else if (event.key === ".") {
+        updateScreen(event.key);
+    } else if (event.key === "+" || event.key === "-" || event.key === "*" || event.key === "/") {
+        updateOperator(event.key);
+    } else if (event.key === "Enter") {
+        evaluate();
+    } else if (event.key === "Escape") {
+        clearScreen();
+    }
+})
 
 
 clearButton.addEventListener("click", () => clearScreen());
@@ -65,7 +71,7 @@ function evaluate() {
             }            
         case "÷":
             if (divide(firstNumber, secondNumber).toString().length > maxDisplayLength) {
-                errorScreen();
+                display.textContent = divide(firstNumber, secondNumber).toString().substring(0, 8);
                 break;
             } else {
                 display.textContent = divide(firstNumber, secondNumber);
