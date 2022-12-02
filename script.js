@@ -13,37 +13,7 @@ const operators = document.querySelectorAll("#operator");
 const equals = document.querySelector(".equals");
 
 numberButtons.forEach(digit => {
-    digit.addEventListener("click", () => {
-        if (display.textContent === "0" && digit.textContent === "0") {
-            return;
-        } else if (display.textContent.includes(".") && digit.textContent === ".") {
-            return;
-        } else if (display.textContent.charAt(0) === "0" && display.textContent.length == 1 && digit.textContent != ".") {
-            if (displayClearFlag) {
-                display.textContent = "";
-                display.textContent += digit.textContent;
-                displayValue = display.textContent;
-                displayClearFlag = false;
-            } else {
-                display.textContent = "";
-                display.textContent += digit.textContent;
-                displayValue = display.textContent;
-            }            
-        } else if (display.textContent.length == maxDisplayLength && displayClearFlag == false) {
-            return;
-        } else {
-            if (displayClearFlag) {
-                display.textContent = "";
-                display.textContent += digit.textContent;
-                displayValue = display.textContent;
-                displayClearFlag = false;
-            } else {
-                display.textContent += digit.textContent;
-                displayValue = display.textContent;
-            }
-            
-        }
-    })
+    digit.addEventListener("click", () => updateScreen(digit.textContent));
 })
 
 // numberButtons.forEach(digit => {
@@ -55,28 +25,15 @@ numberButtons.forEach(digit => {
 
 
 
-clearButton.addEventListener("click", () => {
-    display.textContent = "0";
-    if (clearCount == 1) {
-        firstNumber = undefined;
-        secondNumber = undefined;
-        operatorValue = undefined;
-        clearCount--;
-    } else {
-        clearCount++;
-    }
-})
+clearButton.addEventListener("click", () => clearScreen());
 
 operators.forEach(operator => {
-    operator.addEventListener("click", () => {
-        display.textContent = displayValue;
-        firstNumber ? secondNumber = Number(displayValue) : firstNumber = Number(displayValue);
-        operatorValue = operator.textContent;
-        displayClearFlag = true;
-    })
+    operator.addEventListener("click", () => updateOperator(operator.textContent));
 })
 
-equals.addEventListener("click", () => {
+equals.addEventListener("click", () => evaluate());
+
+function evaluate() {
     secondNumber = Number(display.textContent)
     switch (operatorValue) {
         case "+":
@@ -121,12 +78,61 @@ equals.addEventListener("click", () => {
     firstNumber = undefined;
     secondNumber = undefined;
     operatorValue = undefined;
-})
+}
+
+function updateScreen (digit) {
+    if (display.textContent === "0" && digit === "0") {
+        return;
+    } else if (display.textContent.includes(".") && digit === ".") {
+        return;
+    } else if (display.textContent.charAt(0) === "0" && display.textContent.length == 1 && digit != ".") {
+        if (displayClearFlag) {
+            display.textContent = "";
+            display.textContent += digit;
+            displayValue = display.textContent;
+            displayClearFlag = false;
+        } else {
+            display.textContent = "";
+            display.textContent += digit;
+            displayValue = display.textContent;
+        }            
+    } else if (display.textContent.length == maxDisplayLength && displayClearFlag == false) {
+        return;
+    } else {
+        if (displayClearFlag) {
+            display.textContent = "";
+            display.textContent += digit;
+            displayValue = display.textContent;
+            displayClearFlag = false;
+        } else {
+            display.textContent += digit;
+            displayValue = display.textContent;
+        }        
+    }
+}
+
+function updateOperator(operator) {
+    display.textContent = displayValue;
+        firstNumber ? secondNumber = Number(displayValue) : firstNumber = Number(displayValue);
+        operatorValue = operator;
+        displayClearFlag = true;
+}
+
+function clearScreen () {
+    display.textContent = "0";
+    if (clearCount == 1) {
+        firstNumber = undefined;
+        secondNumber = undefined;
+        operatorValue = undefined;
+        clearCount--;
+    } else {
+        clearCount++;
+    }
+}
 
 function errorScreen() {
     display.textContent = "halp!";
 }
-
 
 function add(firstNumber, secondNumber) {
     return firstNumber + secondNumber;
